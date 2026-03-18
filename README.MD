@@ -13,11 +13,11 @@ import "github.com/RegenJoho/HttpDo"
 
 ##### Run a simple GET Request, for example a webhook:
 ```golang
-err = HttpDo.New().GET().Url("http://example.com/your-url").Run().Err()
+err := HttpDo.New().GET().Url("http://example.com/your-url").Run().Err()
 ```
 ##### POST request with json body:
 ```golang
-err = HttpDo.New().POST().MarshalJSON(yourStruct).Run().Err()
+err := HttpDo.New().POST().MarshalJSON(yourStruct).Run().Err()
 ```
 Please note that this also works with xml, in that case use MarshalXML instead.
 Behind the scenes the encoding/json and encoding/xml is used, so keep in mind that your structs need to have the proper tags.
@@ -30,12 +30,15 @@ if err != nil {
 }
 data := YourStruct{}
 err = request.UnmarshalJSONResponse(&data)
+if err != nil {
+	panic(err)
+}
 ```
 As above, the same is possible with xml using UnmarshalXMLResponse.
 
 ##### Custom HTTP request method
 ```golang
-err = HttpDo.New().Method("your-method").Url("http://example.com/your-url").Run().Err()
+err := HttpDo.New().Method("your-method").Url("http://example.com/your-url").Run().Err()
 ```
 The standard HTTP request headers are also provided on their own, but using this anything is possible.
  ### Limitations
